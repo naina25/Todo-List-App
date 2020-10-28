@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-let listItem; 
+let listItems = [];
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -17,11 +17,13 @@ app.get("/", (req,res) => {
     }
     let day = today.toLocaleDateString("en-US", options);
 
-    res.render('list', {kindOfday:day , newListItem: listItem});
+    res.render('list', {kindOfday:day , newListItems: listItems});
 })
 
 app.post('/', (req,res)=>{
-    listItem = req.body.listItem;
+    let newLI = document.
+    let item = req.body.listItem;
+    listItems.push(item);
     res.redirect("/");
 })
 
