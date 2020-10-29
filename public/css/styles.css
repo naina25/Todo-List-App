@@ -83,14 +83,3 @@ input[type="text"]:focus {
   outline: none;
   box-shadow: inset 0 -3px 0 0 #A683E3;
 }
-
-::placeholder {
-  color: rgb(148, 146, 146);
-  opacity: 1;
-}
-
-footer {
-  color: white;
-  color: rgba(0, 0, 0, 0.5);
-  text-align: center;
-}
