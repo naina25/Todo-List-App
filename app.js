@@ -24,10 +24,17 @@ app.get("/", (req,res) => {
 })
 
 app.post('/', (req,res)=>{
+    console.log(req.body);
     let item = req.body.listItem;
-    listItems.push(item);
-    console.log(listItems);
-    res.redirect("/");
+    // if statement for checking if the post request is for home route or for work route
+    if(req.body.list === "Work"){
+        workList.push(item);
+        res.redirect("/work");
+    }else{
+        listItems.push(item);
+        res.redirect("/");
+    }
+    
 })
 
 app.get("/work", (req,res)=>{
