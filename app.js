@@ -4,15 +4,15 @@ const { static } = require('express');
 const date = require(__dirname + "/date.js")
 
 const app = express();
-let listItems = ["Buy Food", "Cook Food", "Eat Food"];
-let workList = [];
+const listItems = ["Buy Food", "Cook Food", "Eat Food"];
+const workList = [];
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
 
 app.get("/", (req,res) => {
-    let day = date();
+    let day = date.getDate();
     res.render('list', {listTitle:day , newListItems: listItems});
 })
 
@@ -39,9 +39,6 @@ app.post("/work",(req,res)=>{
     workList.push(item);
     res.redirect("/work");
 })
-
-
-
 app.listen(3000, () => {
     console.log("Server has staretd on port 3000");
 })
