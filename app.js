@@ -4,6 +4,7 @@ const { static } = require('express');
 
 const app = express();
 let listItems = ["Buy Food", "Cook Food", "Eat Food"];
+let workList = [];
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -19,7 +20,7 @@ app.get("/", (req,res) => {
     }
     let day = today.toLocaleDateString("en-US", options);
 
-    res.render('list', {kindOfday:day , newListItems: listItems});
+    res.render('list', {listTitle:day , newListItems: listItems});
 })
 
 app.post('/', (req,res)=>{
@@ -28,6 +29,18 @@ app.post('/', (req,res)=>{
     console.log(listItems);
     res.redirect("/");
 })
+
+app.get("/work", (req,res)=>{
+    res.render('list', {listTitle:"Work List" , newListItems: workList});
+})
+
+app.post("/work",(req,res)=>{
+    let item = req.body.listItem;
+    workList.push(item);
+    res.redirect("/work");
+})
+
+
 
 app.listen(3000, () => {
     console.log("Server has staretd on port 3000");
