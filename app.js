@@ -1,11 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { static } = require('express');
 
 const app = express();
-let listItems = [];
+let listItems = ["Buy Food", "Cook Food", "Eat Food"];
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('public'));
 
 app.get("/", (req,res) => {
     const today = new Date();
@@ -21,9 +23,9 @@ app.get("/", (req,res) => {
 })
 
 app.post('/', (req,res)=>{
-    let newLI = document.
     let item = req.body.listItem;
     listItems.push(item);
+    console.log(listItems);
     res.redirect("/");
 })
 
