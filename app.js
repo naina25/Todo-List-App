@@ -30,26 +30,31 @@ const cookFood = new Item({
 
 const defaultItems = [goToStore, buyFood, cookFood];
 
-Item.insertMany(defaultItems, err => {
-  if(err){
-    console.log(err);
-  }else{
-    console.log("items are successfully added to the database");
-  }
-})
+
 
 app.get("/", function(req, res) {
-
-  Item.find((err, results)=> {
-    if(err){
-      console.log(err);
-    }
-    else{
-        const day = date.getDate();
-        res.render("list", {listTitle: "day", newListItems: results});
-        console.log(results);
-    }
-  })
+    Item.find((err, results)=> {
+        if(err){
+        console.log(err);
+        }
+        else{
+            if(results.length === 0){
+                Item.insertMany(defaultItems, err => {
+                    if(err){
+                      console.log(err);
+                    }else{
+                      console.log("items are successfully added to the database");
+                    }
+                  })
+                res.redirect("/");
+            }
+            else{
+                const day = date.getDate();
+                res.render("list", {listTitle: day, newListItems: results});
+            }
+            
+        }
+    })
 });
 
 app.post('/', (req,res)=>{
