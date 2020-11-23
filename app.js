@@ -30,8 +30,6 @@ const cookFood = new Item({
 
 const defaultItems = [goToStore, buyFood, cookFood];
 
-
-
 app.get("/", function(req, res) {
     Item.find((err, results)=> {
         if(err){
@@ -58,17 +56,12 @@ app.get("/", function(req, res) {
 });
 
 app.post('/', (req,res)=>{
-    console.log(req.body);
-    let item = req.body.listItem;
-    // if statement for checking if the post request is for home route or for work route
-    if(req.body.list === "Work"){
-        workList.push(item);
-        res.redirect("/work");
-    }else{
-        listItems.push(item);
-        res.redirect("/");
-    }
-    
+    let newItem = req.body.listItem;
+    const newListItem = new Item({
+        name: newItem
+      })
+    newListItem.save();
+    res.redirect("/");
 })
 
 app.get("/work", (req,res)=>{
