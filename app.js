@@ -62,8 +62,8 @@ app.post('/', (req,res)=>{
       })
     newListItem.save();
     res.redirect("/");
-})
 
+})
 app.get("/work", (req,res)=>{
     res.render('list', {listTitle:"Work List" , newListItems: workList});
 })
@@ -73,6 +73,15 @@ app.post("/work",(req,res)=>{
     workList.push(item);
     res.redirect("/work");
 })
+app.post("/delete", (req,res)=>{
+    const checkedItemId = req.body.checkbox
+    Item.findByIdAndRemove(checkedItemId, err =>
+        {
+            console.log(err);
+        })
+    res.redirect("/");
+})
+
 app.listen(4000, () => {
     console.log("Server has staretd on port 4000");
 })

@@ -14,10 +14,14 @@
     <div class="box">
     <!--Creating new lis for every user input  -->
         <% newListItems.forEach(listItem => { %>
-            <div class="item">
-                <input type="checkbox">
-                <p> <%= listItem.name %></p>
-            </div>
+            <% if(listItem.name){%>
+                <form action="/delete" method="POST">
+                    <div class="item">
+                        <input type="checkbox" name="checkbox" value=<%= listItem._id %> onchange="this.form.submit()">
+                        <p> <%= listItem.name %></p>
+                    </div>
+                </form>
+            <%}%>
         <%})%>
         <form class="item" action="/" method="POST">
             <input type = "text" name = "listItem" placeholder="New Item" autocomplete="off">
