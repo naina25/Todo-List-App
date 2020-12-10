@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+            crossorigin="anonymous"
+        />
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -17,15 +23,16 @@
             <% if(listItem.name){%>
                 <form action="/delete" method="POST">
                     <div class="item">
-                        <input type="checkbox" name="checkbox" value=<%= listItem._id %> onchange="this.form.submit()">
+                        <input type="checkbox" name="checkbox" value=<%= listItem._id%>>
                         <p> <%= listItem.name %></p>
+                        <a href="/delete/<%= listItem._id%>" class="delete"><i class="fas fa-trash-alt fa-md delIcon"></i></a>
                     </div>
                 </form>
             <%}%>
         <%})%>
         <form class="item" action="/" method="POST">
             <input type = "text" name = "listItem" placeholder="New Item" autocomplete="off">
-            <button type = "submit" name ="list" value =<%= listTitle %>> + </button>
+            <button type = "submit" class="addBtn" name ="list" value =<%= listTitle %>> + </button>
         </form> 
     </div>
 </body>
