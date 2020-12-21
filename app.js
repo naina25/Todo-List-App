@@ -2,11 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { static } = require("express");
 const mongoose = require("mongoose");
+const _  = require("lodash");
 
 const app = express();
 const listItems = ["Buy Food", "Cook Food", "Eat Food"];
 const workList = [];
 app.set("view engine", "ejs");
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -59,7 +61,7 @@ app.post("/", (req, res) => {
 });
 
 app.get("/:customListName", (req, res) => {
-  const customListName = req.params.customListName;
+  const customListName = _.capitalize(req.params.customListName);
   const list = new List({
     name: customListName,
     items: defaultItems,
