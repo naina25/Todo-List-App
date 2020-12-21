@@ -98,6 +98,11 @@ app.get("/delete/:listName/:id", (req, res) => {
   res.redirect(`/${listName}`);
 });
 
-app.listen(4040, () => {
-  console.log("Server has staretd on port 4040");
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 4040;
+}
+
+app.listen(port, () => {
+  console.log(`Server has staretd on port ${port}`);
 });
