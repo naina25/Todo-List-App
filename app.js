@@ -100,9 +100,9 @@ app.get("/delete/:listName/:id", (req, res) => {
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-  port = 4040;
+  port = 8080;
 }
 
 app.listen(port, () => {
-  console.log(`Server has staretd on port ${port}`);
+  console.log("Server has staretd successfully");
 });
