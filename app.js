@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const { static } = require("express");
 const mongoose = require("mongoose");
 const _  = require("lodash");
+require("dotenv").config();
 
 const app = express();
 const listItems = ["Buy Food", "Cook Food", "Eat Food"];
@@ -13,7 +14,8 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/todolistDb", {
+const MONGO_URI = process.env.MONGO_URI;
+mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
